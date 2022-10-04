@@ -17,7 +17,7 @@
     padding: 0.5rem 1rem;
     font-weight: bold;
     box-shadow: 0.1rem 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
-    transition-duration: 60ms;
+    transition-duration: 60ms; 
   }
 button.primary:active{
     background:  #ec7070;
