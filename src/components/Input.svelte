@@ -3,7 +3,7 @@
 let firstNumber;
 let secondNumber;
   let result;
-  let isCorrect;
+  let isCorrect = true;
   let correctAnswers = [];
   getNewNumbers();
   function getRandomIntInclusive(min, max) {
@@ -28,6 +28,9 @@ let secondNumber;
       getNewNumbers();
       result=undefined;
     }
+    else{
+      isCorrect = false;
+    }
   }
 </script>
 
@@ -42,9 +45,7 @@ let secondNumber;
       <Button type="submit">Submit</Button>
     </form>
   </h1>
-  {#if isCorrect}
-    <div>correct</div>
-  {:else if !isCorrect}
+  {#if !isCorrect}
     <div>incorrect</div>
   {/if}
 </span>
