@@ -5,7 +5,6 @@
 
 <main>
  <div>
-  <h1>hello world</h1>
   <Input/>
  <Footer/>
  </div>

@@ -1,18 +1,53 @@
 <script>
-let firstNumber = getRandomIntInclusive(50,1000);
-let secondNumber = getRandomIntInclusive(10,100);
-let result;
-
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+  import Button from "../shared/Button.svelte";
+let firstNumber;
+let secondNumber;
+  let result;
+  let isCorrect;
+  let correctAnswers = [];
+  getNewNumbers();
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  function getNewNumbers() {
+    firstNumber = getRandomIntInclusive(50,1000);
+    secondNumber = getRandomIntInclusive(10, 100);
+  }
+  function compareHandler() {
+    console.log(
+      "%c [  ]-16",
+      "font-size:13px; background:pink; color:#bf2c9f;",
+      result
+    );
+    if (firstNumber + secondNumber === result) {
+      isCorrect = true;
+      let correctAnswer = `${firstNumber} + ${secondNumber} = ${result} is correct!`;
+      correctAnswers = [...correctAnswers, correctAnswer];
+      getNewNumbers();
+      result=undefined;
+    }
+  }
 </script>
-<span>
-    <h1>{firstNumber} + {secondNumber} = </h1>
-    <input value={result}/>
-</span>
-<style>
 
+{#each correctAnswers as correctAnswer}
+  <div>{correctAnswer}</div>
+{/each}
+<span>
+  <h1>
+    {firstNumber} + {secondNumber} =
+    <form on:submit|preventDefault = {compareHandler}>
+      <input type="number" placeholder="answer" bind:value={result} />
+      <Button type="submit">Submit</Button>
+    </form>
+  </h1>
+  {#if isCorrect}
+    <div>correct</div>
+  {:else if !isCorrect}
+    <div>incorrect</div>
+  {/if}
+</span>
+
+<style>
 </style>
