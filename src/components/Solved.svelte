@@ -1,12 +1,14 @@
 <script>
   import Button from "../shared/Button.svelte";
-  export let correctAnswers = [];
+  export let answers = [];
 </script>
 
-{#each correctAnswers as correctAnswer}
-  <div>{correctAnswer}</div>
+{#each answers as answer}
+  <div>{answer}</div>
 {/each}
 
 <style>
+  div {
+    margin: 10px;
+  }
 </style>
-
