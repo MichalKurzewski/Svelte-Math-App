@@ -5,7 +5,7 @@
 
   let numberOfNumbers = 2;
   let numbers = getNewNumbers(numberOfNumbers);
-
+  let equationType = "+";
   let result;
   let isCorrect = true;
   let answers = [];
@@ -15,6 +15,7 @@
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+
   function getNewNumbers(numberCount) {
     let arr = [];
     for (let index = 0; index < numberCount; index++) {
@@ -24,43 +25,60 @@
     }
     return arr;
   }
-  function compareHandler() {
-    isCorrect = numbers.reduce((sum, a) => sum + a, 0) === result;
-    let answer = `${numbers.join(" + ")} = ${result} is ${
+
+  function compareEquationHandler() {
+    switch (equationType) {
+      case "+":
+        isCorrect = numbers.reduce((sum, a) => sum + a, 0) === result;
+        break;
+      case "-":
+        isCorrect = numbers.reduce((sum, a) => sum - a) === result;
+        break;
+      default:
+        break;
+    }
+    let answer = `${numbers.join(` ${equationType} `)} = ${result} is ${
       isCorrect ? "correct" : "incorrect"
     }!`;
-    numbers = isCorrect? getNewNumbers(numberOfNumbers):numbers;
+    if (isCorrect) {
+      equationType = equationType === "+" ? "-" : "+";
+      numbers = getNewNumbers(numberOfNumbers);
+    }
     answers = [...answers, answer];
     result = undefined;
   }
-  function emptyMessage() {
+  function emptyMessageHandler() {
     isCorrect = false;
   }
 </script>
 
-<Card class="container">
+<Card>
+  <h1>
+    {numbers.join(` ${equationType} `)} =
+  </h1>
+  <form
+    on:submit|preventDefault={result
+      ? compareEquationHandler
+      : emptyMessageHandler}
+  >
+    <input
+      class="inputField"
+      type="number"
+      placeholder="answer"
+      bind:value={result}
+    />
+    <Button type="submit">Submit</Button>
+  </form>
 
-    <h1>
-      {numbers.join(" + ")} =
-    </h1>
-    <form on:submit|preventDefault={result ? compareHandler : emptyMessage}>
-      <input
-        class="inputField"
-        type="number"
-        placeholder="answer"
-        bind:value={result}
-      />
-      <Button type="submit">Submit</Button>
-    </form>
- 
   {#if !isCorrect}
-    <div>incorrect</div>
+    <h1 class="red-flag">incorrect</h1>
   {/if}
 </Card>
 <Solved {answers} />
 
 <style>
-  div {
+  .red-flag {
+    color: red;
     margin: 10px;
   }
   .inputField {
