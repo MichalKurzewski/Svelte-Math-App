@@ -9,6 +9,7 @@
   let result;
   let isCorrect = true;
   let answers = [];
+  let answer;
 
   function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -37,7 +38,7 @@
       default:
         break;
     }
-    let answer = `${numbers.join(` ${equationType} `)} = ${result} is ${
+    answer = `${numbers.join(` ${equationType} `)} = ${result} is ${
       isCorrect ? "correct" : "incorrect"
     }!`;
     if (isCorrect) {
@@ -74,7 +75,7 @@
     <h1 class="red-flag">incorrect</h1>
   {/if}
 </Card>
-<Solved {answers} />
+<Solved {answer} />
 
 <style>
   .red-flag {
