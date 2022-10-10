@@ -8,7 +8,6 @@
   let equationType = "+";
   let result;
   let isCorrect = true;
-  let answers = [];
   let answer;
 
   function getRandomIntInclusive(min, max) {
@@ -45,7 +44,6 @@
       equationType = equationType === "+" ? "-" : "+";
       numbers = getNewNumbers(numberOfNumbers);
     }
-    answers = [...answers, answer];
     result = undefined;
   }
   function emptyMessageHandler() {

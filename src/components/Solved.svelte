@@ -12,7 +12,7 @@
 {#each $storedAnswers as answer}
   <div>{answer}</div>
 {/each}
-{#if $storedAnswers.length>0}
+{#if $storedAnswers.length > 0}
   <Button on:click={clearHandler}>Clear</Button>
 {/if}
 
