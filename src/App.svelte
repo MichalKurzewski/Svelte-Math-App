@@ -6,15 +6,14 @@
 
 <main>
   <div class="top-container">
-
-      <Input />
+    <Input />
 
     <Footer />
   </div>
 </main>
 
 <style>
-  .top-container{
+  .top-container {
     text-align: center;
     width: 80%;
     margin: auto;

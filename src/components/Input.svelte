@@ -1,13 +1,18 @@
+
 <script>
+
   import Solved from "./Solved.svelte";
   import Button from "../shared/Button.svelte";
   import Card from "../shared/Card.svelte";
+  import Totals from "../shared/Totals.svelte";
 
   let numberOfNumbers = 2;
   let numbers = getNewNumbers(numberOfNumbers);
   let equationType = "+";
   let result;
   let isCorrect = true;
+  let correctCount = 0;
+  let incorrectCount = 0;
   let answer;
 
   function getRandomIntInclusive(min, max) {
@@ -37,6 +42,9 @@
       default:
         break;
     }
+
+    isCorrect ? correctCount++ : incorrectCount++;
+
     answer = `${numbers.join(` ${equationType} `)} = ${result} is ${
       isCorrect ? "correct" : "incorrect"
     }!`;
@@ -50,7 +58,7 @@
     isCorrect = false;
   }
 </script>
-
+<Totals {correctCount} {incorrectCount}/>
 <Card>
   <h1>
     {numbers.join(` ${equationType} `)} =
